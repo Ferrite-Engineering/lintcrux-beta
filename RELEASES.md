@@ -6,6 +6,53 @@ is also where the download links are posted while the beta is opening up.
 
 ---
 
+## 0.5.0 — 2026-07-31
+
+A release about working across more than one project at a time, and about
+Windows finally behaving.
+
+### New
+
+- **Work across projects.** A project switcher, a recents panel, and
+  cross-project search, so a codebase split over several LintCrux projects is
+  one place to look rather than several.
+- **Severity and trend colours come from the theme.** Severity and trend now
+  resolve through proper theme token catalogs, so they stay legible and
+  consistent in both light and dark rather than being hard-coded.
+
+### Fixed
+
+- **Verilator and GHDL are found on Windows.** LintCrux now augments the
+  persistent PATH to locate the engines, instead of failing to find an
+  installed toolchain.
+- **Windows paths in engine output parse correctly.** Drive-letter paths
+  (`C:\…`) in Verilator / GHDL diagnostics were being mis-parsed, so those
+  violations did not land where they belonged.
+- **The CLI advertises the right exit code.** The usage block claimed exit 4
+  for an unusable positional argument; it is 64.
+- **Quit works from every route.** The menu item did nothing on some screens.
+- **The violations pane no longer overflows** with long rule names or paths.
+- **A sensible minimum window size** (800×500) on macOS, Windows and Linux,
+  so the layout can no longer be crushed into an unusable state.
+
+### Also
+
+- **One consistent suite.** The menu bar, toolbar, status bar and Settings are
+  now shared components across all four apps, and panels moved to a
+  VS Code-style dock model: bottom, right and left regions, tabs you can drag
+  between docks, restore bars for collapsed regions, and direction-aware hide
+  controls. The run control is now a single morphing button with real
+  enablement, and the duplicate footer tally is gone. The welcome screen
+  gained an animated app logo and now shows the running version — handy in
+  the browser, where there is no menu bar to check.
+- Other performance and quality enhancements.
+
+> **A note on version numbers.** LintCrux desktop builds shipped as part of the
+> 2026.07 suite beta before this file caught up. The app now reports `0.5.0`,
+> matching its three siblings and the suite release it ships in.
+
+---
+
 ## Unreleased — 0.1.0
 
 The first public beta. Notes land here the day it ships; until then this file is
