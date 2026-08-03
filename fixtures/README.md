@@ -70,19 +70,11 @@ commits:
 | `capture.json` | which binary produced it, at which version, on what day — and any engine left unverified, with the reason |
 | `expected.sarif.json` | the golden, **derived** from those recordings by replaying them through the real parsers |
 
-That structure exists because the alternative failed. Until 2026-08-03 these
-goldens were fiction — nothing ran an engine against them and nothing compared
-anything to them. When they were finally checked against real binaries, **two of
-four were wrong**: one claimed two Verilator warnings the binary does not emit
-(a comment starting with the word "Verilator" was being read as a pragma, and
-the checks were opt-in behind `-Wall` besides), and the VHDL fixture claimed 2
-GHDL results where GHDL 6.0.0 produces 5, at different lines, including a hard
-error the golden never mentioned.
-
-So a fabricated expectation is no longer possible without also fabricating a
-subprocess recording that `capture.json` forces you to attribute to a named
-binary and version — and "we could not verify this engine" is now something the
-corpus has to say out loud rather than something that reads identically to "we
+That structure exists so an expectation cannot drift away from what the tools
+actually do. A golden can only change if the recording behind it changes, and
+`capture.json` forces every recording to name the binary and version that
+produced it — so "we could not verify this engine on this machine" is something
+the corpus states out loud rather than something that reads identically to "we
 checked it." Every engine every project fixture enables currently has a
 recording from a real binary; none are unverified.
 
