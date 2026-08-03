@@ -1,0 +1,61 @@
+{
+  "description": "Six completed lint runs exercising all three trend-alert kinds under a compact custom window: error drift (WIDTH ramp), new persistent rule (typedef-structs), and a sudden spike (MULTIDRIVEN).",
+  "alertCount": 5,
+  "alerts": [
+    {
+      "kind": "severityClassDrift",
+      "severity": "critical",
+      "ruleId": null,
+      "violationSeverity": "error",
+      "baselineValue": 1.0,
+      "currentValue": 3.0,
+      "deltaPercent": 200.0,
+      "detectedAtRunId": "r5",
+      "firstObservedAtRunId": "r4"
+    },
+    {
+      "kind": "severityClassDrift",
+      "severity": "critical",
+      "ruleId": null,
+      "violationSeverity": "warning",
+      "baselineValue": 3.0,
+      "currentValue": 6.5,
+      "deltaPercent": 116.6667,
+      "detectedAtRunId": "r5",
+      "firstObservedAtRunId": "r4"
+    },
+    {
+      "kind": "newPersistentRule",
+      "severity": "warning",
+      "ruleId": "verible/typedef-structs",
+      "violationSeverity": null,
+      "baselineValue": 0.0,
+      "currentValue": 2.0,
+      "deltaPercent": "Infinity",
+      "detectedAtRunId": "r5",
+      "firstObservedAtRunId": "r4"
+    },
+    {
+      "kind": "suddenSpike",
+      "severity": "warning",
+      "ruleId": "verible/typedef-structs",
+      "violationSeverity": null,
+      "baselineValue": 0.2,
+      "currentValue": 1.0,
+      "deltaPercent": 400.0,
+      "detectedAtRunId": "r5",
+      "firstObservedAtRunId": "r5"
+    },
+    {
+      "kind": "suddenSpike",
+      "severity": "warning",
+      "ruleId": "verilator/MULTIDRIVEN",
+      "violationSeverity": null,
+      "baselineValue": 1.0,
+      "currentValue": 6.0,
+      "deltaPercent": 500.0,
+      "detectedAtRunId": "r5",
+      "firstObservedAtRunId": "r5"
+    }
+  ]
+}

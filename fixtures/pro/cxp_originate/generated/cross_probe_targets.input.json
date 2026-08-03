@@ -1,0 +1,16 @@
+{
+  "description": "One Verilator UNUSEDSIGNAL violation cross-probed to a NetCrux peer (module-scope element) and a WaveCrux peer (source-citation element), plus the ViolationSelectionEmitter broadcast envelope.",
+  "peers": {
+    "netcrux": "peer-netcrux-01",
+    "wavecrux": "peer-wavecrux-01"
+  },
+  "violation": {
+    "engineId": "verilator",
+    "ruleId": "verilator/UNUSEDSIGNAL",
+    "severity": "warning",
+    "message": "Signal is unused: 'cpu_alu_result'",
+    "file": "/proj/src/cpu_alu.sv",
+    "line": 42,
+    "column": 5
+  }
+}
