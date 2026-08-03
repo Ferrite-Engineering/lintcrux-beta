@@ -1,1 +1,0 @@
-verilator --lint-only "a dir/sub mod.sv"

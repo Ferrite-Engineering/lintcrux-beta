@@ -1,2 +1,0 @@
-top.vhd:9:3:warning: signal "spare" is never referenced [-Wunused]
-ghdl:error: compilation error

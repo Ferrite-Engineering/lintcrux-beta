@@ -1,3 +1,0 @@
-adder.vhd:17:14:warning: declaration of "carry" hides signal "carry" [-Whide]
-    variable carry : std_logic;
-             ^

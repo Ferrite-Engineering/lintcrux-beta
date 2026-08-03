@@ -25,11 +25,7 @@ point for the beta:
 - 🙋 **[Ask a question / get help](../../discussions/categories/q-a)** — in Discussions.
 - 📋 **[Release notes](RELEASES.md)** — what changed in each beta build.
 - 📂 **[Browse the test fixtures](fixtures/)** — *this is what LintCrux tests
-  against.* Real engine output, with the goldens derived from it. See
-  [`fixtures/README.md`](fixtures/README.md).
-- ▶️ **[Open an example project](examples/)** — two ready-to-run `.lintcrux`
-  projects, plus a captured SARIF report you can import **with no lint engine
-  installed**. See [`examples/README.md`](examples/README.md).
+  against.* See [`fixtures/README.md`](fixtures/README.md).
 
 > **Two places, clear split.** The **[Issues](../../issues)** tab is a work
 > queue — **bugs and fixture submissions only**. Everything conversational —
@@ -93,7 +89,6 @@ in the triage queue, not the discussion stream.
 | [`docs/BETA_GUIDE.md`](docs/BETA_GUIDE.md) | How to join the beta, what to test, how feedback is handled, what you get for contributing. |
 | [`docs/SUBMITTING_FIXTURES.md`](docs/SUBMITTING_FIXTURES.md) | How to contribute a lint fixture (and the license rules). |
 | [`fixtures/`](fixtures/) | The engine-output + project test-fixture corpus LintCrux is tested against. |
-| [`examples/`](examples/) | Ready-to-open projects you run in the app (and one SARIF report that needs no engine). |
 | [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) | Bug / fixture issue forms (feature ideas go to Discussions). |
 
 ## After the beta
