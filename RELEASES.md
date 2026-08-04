@@ -26,6 +26,8 @@ against the real binary rather than against what the manifest claimed.
 
 ### Fixed
 
+- **If you have run projects with GHDL, slang or Verilator, re-run them on this
+  build.** Those engines could report fewer findings than they should have.
 - **Every engine download URL in the manifest is real.** The ones that were not
   fetchable are corrected or removed — notably a Verible pin that could not be
   downloaded at all, which is now guarded against recurring.
