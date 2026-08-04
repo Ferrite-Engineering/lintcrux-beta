@@ -6,6 +6,46 @@ is also where the download links are posted while the beta is opening up.
 
 ---
 
+## 0.6.0 — 2026-08-04
+
+An engines release, with a RISC-V flavour: the lowRISC / OpenTitan style guide
+now ships as a rule profile, and every lint engine we advertise was audited
+against the real binary rather than against what the manifest claimed.
+
+### New
+
+- **The lowRISC / OpenTitan style guide as a rule profile.** Select it and
+  LintCrux checks your RTL against the same Verible conventions the OpenTitan
+  and Ibex projects use — useful whether or not you are working on RISC-V, and
+  the obvious starting point if you are.
+- **Open Source Files is on the toolbar**, gated on having a project open, so
+  the action is reachable without going hunting for it.
+- **Two example projects and a no-engine SARIF report.** Open them with nothing
+  installed and see real findings, including what a report looks like before
+  you have wired up an engine.
+
+### Fixed
+
+- **Every engine download URL in the manifest is real.** The ones that were not
+  fetchable are corrected or removed — notably a Verible pin that could not be
+  downloaded at all, which is now guarded against recurring.
+- **The GHDL and Slang adapters work against their pinned versions.** Both were
+  written against different releases than the ones we ship.
+- **Verilator is audited against the actual binary**, and project fixtures are
+  now captured from real runs rather than hand-written expectations.
+- **Project goldens no longer carry the capture host's absolute paths**, so
+  re-capture is reproducible on any machine.
+
+### Also
+
+- **Linux requirements are now measured, not asserted.** Our published glibc
+  figure had drifted from what we actually shipped; every release build now
+  verifies it. LintCrux requires glibc 2.34, which means it runs on RHEL /
+  Rocky / AlmaLinux 9, Ubuntu 22.04+ and Debian 12+.
+- Other performance and quality enhancements.
+
+---
+
 ## 0.5.0 — 2026-07-31
 
 A release about working across more than one project at a time, and about
