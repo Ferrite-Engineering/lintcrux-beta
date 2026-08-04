@@ -12,29 +12,32 @@ open-core and the Pro fixtures in the app and watch every feature work against
 them.
 
 > ⚙️ **This tree is generated.** It's mirrored from the LintCrux test suite by
-> tooling — don't edit it here. The corpus is published as the beta opens up; the
-> layout below is the shape it takes, and the shape a submission should follow.
-> To contribute a fixture, use the
+> tooling — don't edit it here. To contribute a fixture, use the
 > **[fixture submission form](../../issues/new?template=fixture_submission.yml)**;
 > see [SUBMITTING_FIXTURES.md](../docs/SUBMITTING_FIXTURES.md).
+
+Looking for something you can just **open and run**? That's
+[`examples/`](../examples/) — two ready-made projects, one of which needs no
+lint engine installed at all. This tree is test data; those are tools.
 
 ## Layout
 
 ```
 fixtures/
 ├── open-core/
-│   ├── engines/<engine>/     # Raw engine output → expected SARIF, per case
-│   │   ├── verilator/
+│   ├── engines/<engine>/       # Raw engine output → expected SARIF, per case
+│   │   ├── ghdl/               #   captured/ + generated/
+│   │   ├── slang/              #   captured/ + generated/
+│   │   ├── svlint/
 │   │   ├── verible/
-│   │   ├── slang/
-│   │   ├── yosys/
-│   │   ├── ghdl/
-│   │   └── svlint/
-│   └── projects/             # Runnable .lintcrux projects + their sources
+│   │   ├── verilator/
+│   │   └── yosys/
+│   ├── projects/               # Whole .lintcrux projects + recorded engine runs
+│   └── sarif/                  # A SARIF report for the import path
 └── pro/
-    ├── waivers/              # Waiver matching + audit
-    ├── trends/               # Trend alerting
-    └── cxp_originate/        # Cross-probe target resolution
+    ├── waivers/                # Waiver matching + audit
+    ├── trends/                 # Trend alerting
+    └── cxp_originate/          # Cross-probe target resolution
 ```
 
 ## The two fixture shapes
@@ -55,8 +58,29 @@ routing (`.vhd` to GHDL, `.sv`/`.v` to the SystemVerilog engines), severity
 overrides, and end-to-end aggregation across engines — including a deliberately
 clean project, so "reports nothing" stays a tested outcome.
 
-The Pro directories follow the same input-plus-golden idea for waiver matching,
-trend alerting, and cross-probe target resolution.
+## The goldens are derived from real binaries, not written by hand
+
+This is the part worth reading. `projects/<name>/expected.sarif.json` is not
+somebody's idea of what the engines *should* say. Every project fixture also
+commits:
+
+| File | What it is |
+|---|---|
+| `engine-output/<engineId>.json` | the recorded subprocess — argv, stdout, stderr, exit code, byte for byte |
+| `capture.json` | which binary produced it, at which version, on what day — and any engine left unverified, with the reason |
+| `expected.sarif.json` | the golden, **derived** from those recordings by replaying them through the real parsers |
+
+That structure exists so an expectation cannot drift away from what the tools
+actually do. A golden can only change if the recording behind it changes, and
+`capture.json` forces every recording to name the binary and version that
+produced it — so "we could not verify this engine on this machine" is something
+the corpus states out loud rather than something that reads identically to "we
+checked it." Every engine every project fixture enables currently has a
+recording from a real binary; none are unverified.
+
+You can replay all of it. The recordings are plain JSON, and the paths inside
+the goldens are relative to the fixture directory, so they mean the same thing
+in your checkout as in ours.
 
 ## The two fixture tiers
 
@@ -80,9 +104,9 @@ into the public domain (CC0).
 `captured/` fixtures retain the license of the upstream project they were derived
 from — always one of **MIT, BSD-2-Clause, BSD-3-Clause, Apache-2.0, ISC, CC0, or
 public domain**. The exact source and license for each is in that case's
-`PROVENANCE.md`. LintCrux's tooling refuses to publish a captured fixture that
-lacks a provenance record, and the test suite blocks any fixture outside the
-license allow-list.
+`PROVENANCE.md`. LintCrux's publishing tool **aborts** rather than publish a
+captured fixture that lacks a provenance record, and the test suite blocks any
+fixture outside the license allow-list.
 
 If you reuse a captured fixture, honor the upstream license named in its
 `PROVENANCE.md`.

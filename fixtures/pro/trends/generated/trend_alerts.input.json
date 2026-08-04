@@ -1,0 +1,262 @@
+{
+  "description": "Six completed lint runs exercising all three trend-alert kinds under a compact custom window: error drift (WIDTH ramp), new persistent rule (typedef-structs), and a sudden spike (MULTIDRIVEN).",
+  "config": {
+    "severityDriftRecentRuns": 2,
+    "severityDriftPriorRuns": 2,
+    "severityDriftThresholdPercent": 25,
+    "severityDriftCriticalPercent": 50,
+    "newPersistentRuleRecentRuns": 2,
+    "newPersistentRulePriorRuns": 2,
+    "suddenSpikeMultiplier": 3,
+    "suddenSpikeWarningMultiplier": 5,
+    "suddenSpikeCriticalMultiplier": 10
+  },
+  "runs": [
+    {
+      "runId": "r0",
+      "timestamp": "2026-07-01T09:00:00.000Z",
+      "points": [
+        {
+          "ruleId": "verilator/UNUSEDSIGNAL",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 10
+        },
+        {
+          "ruleId": "verilator/UNUSEDSIGNAL",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 20
+        },
+        {
+          "ruleId": "verilator/WIDTH",
+          "severity": "error",
+          "file": "/proj/src/alu.sv",
+          "line": 5
+        },
+        {
+          "ruleId": "verilator/MULTIDRIVEN",
+          "severity": "warning",
+          "file": "/proj/src/bus.sv",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "runId": "r1",
+      "timestamp": "2026-07-02T09:00:00.000Z",
+      "points": [
+        {
+          "ruleId": "verilator/UNUSEDSIGNAL",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 10
+        },
+        {
+          "ruleId": "verilator/UNUSEDSIGNAL",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 20
+        },
+        {
+          "ruleId": "verilator/WIDTH",
+          "severity": "error",
+          "file": "/proj/src/alu.sv",
+          "line": 5
+        },
+        {
+          "ruleId": "verilator/MULTIDRIVEN",
+          "severity": "warning",
+          "file": "/proj/src/bus.sv",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "runId": "r2",
+      "timestamp": "2026-07-03T09:00:00.000Z",
+      "points": [
+        {
+          "ruleId": "verilator/UNUSEDSIGNAL",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 10
+        },
+        {
+          "ruleId": "verilator/UNUSEDSIGNAL",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 20
+        },
+        {
+          "ruleId": "verilator/WIDTH",
+          "severity": "error",
+          "file": "/proj/src/alu.sv",
+          "line": 5
+        },
+        {
+          "ruleId": "verilator/MULTIDRIVEN",
+          "severity": "warning",
+          "file": "/proj/src/bus.sv",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "runId": "r3",
+      "timestamp": "2026-07-04T09:00:00.000Z",
+      "points": [
+        {
+          "ruleId": "verilator/UNUSEDSIGNAL",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 10
+        },
+        {
+          "ruleId": "verilator/UNUSEDSIGNAL",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 20
+        },
+        {
+          "ruleId": "verilator/WIDTH",
+          "severity": "error",
+          "file": "/proj/src/alu.sv",
+          "line": 5
+        },
+        {
+          "ruleId": "verilator/MULTIDRIVEN",
+          "severity": "warning",
+          "file": "/proj/src/bus.sv",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "runId": "r4",
+      "timestamp": "2026-07-05T09:00:00.000Z",
+      "points": [
+        {
+          "ruleId": "verilator/UNUSEDSIGNAL",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 10
+        },
+        {
+          "ruleId": "verilator/UNUSEDSIGNAL",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 20
+        },
+        {
+          "ruleId": "verilator/WIDTH",
+          "severity": "error",
+          "file": "/proj/src/alu.sv",
+          "line": 5
+        },
+        {
+          "ruleId": "verilator/WIDTH",
+          "severity": "error",
+          "file": "/proj/src/alu.sv",
+          "line": 6
+        },
+        {
+          "ruleId": "verilator/WIDTH",
+          "severity": "error",
+          "file": "/proj/src/alu.sv",
+          "line": 7
+        },
+        {
+          "ruleId": "verible/typedef-structs",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 30
+        },
+        {
+          "ruleId": "verilator/MULTIDRIVEN",
+          "severity": "warning",
+          "file": "/proj/src/bus.sv",
+          "line": 1
+        }
+      ]
+    },
+    {
+      "runId": "r5",
+      "timestamp": "2026-07-06T09:00:00.000Z",
+      "points": [
+        {
+          "ruleId": "verilator/UNUSEDSIGNAL",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 10
+        },
+        {
+          "ruleId": "verilator/UNUSEDSIGNAL",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 20
+        },
+        {
+          "ruleId": "verilator/WIDTH",
+          "severity": "error",
+          "file": "/proj/src/alu.sv",
+          "line": 5
+        },
+        {
+          "ruleId": "verilator/WIDTH",
+          "severity": "error",
+          "file": "/proj/src/alu.sv",
+          "line": 6
+        },
+        {
+          "ruleId": "verilator/WIDTH",
+          "severity": "error",
+          "file": "/proj/src/alu.sv",
+          "line": 7
+        },
+        {
+          "ruleId": "verible/typedef-structs",
+          "severity": "warning",
+          "file": "/proj/src/cpu.sv",
+          "line": 30
+        },
+        {
+          "ruleId": "verilator/MULTIDRIVEN",
+          "severity": "warning",
+          "file": "/proj/src/bus.sv",
+          "line": 1
+        },
+        {
+          "ruleId": "verilator/MULTIDRIVEN",
+          "severity": "warning",
+          "file": "/proj/src/bus.sv",
+          "line": 2
+        },
+        {
+          "ruleId": "verilator/MULTIDRIVEN",
+          "severity": "warning",
+          "file": "/proj/src/bus.sv",
+          "line": 3
+        },
+        {
+          "ruleId": "verilator/MULTIDRIVEN",
+          "severity": "warning",
+          "file": "/proj/src/bus.sv",
+          "line": 4
+        },
+        {
+          "ruleId": "verilator/MULTIDRIVEN",
+          "severity": "warning",
+          "file": "/proj/src/bus.sv",
+          "line": 5
+        },
+        {
+          "ruleId": "verilator/MULTIDRIVEN",
+          "severity": "warning",
+          "file": "/proj/src/bus.sv",
+          "line": 6
+        }
+      ]
+    }
+  ]
+}
