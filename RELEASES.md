@@ -6,6 +6,78 @@ is also where the download links are posted while the beta is opening up.
 
 ---
 
+## 0.7.0 — 2026-08-11
+
+A clock-domain release. LintCrux now finds clock-domain crossings itself —
+structurally, from the elaborated netlist — rather than pointing at someone
+else's engine. Around it: a searchable catalog of every rule the engines can
+emit, a shorter route from a violation back to the source that caused it, and
+one file that opens a design across the whole suite.
+
+### New
+
+- **Clock-domain-crossing analysis.** Three rules in Open Core:
+  `cdc/unsync-single-bit` (a single bit crosses with no synchronizer — the
+  destination flop can go metastable), `cdc/unsync-multi-bit` (a bus crosses
+  unsynchronized, so the destination can latch a mix of old and new bits — a
+  value that never existed in the source domain), and `cdc/combo-in-sync`
+  (combinational logic sits between the two flops of a synchronizer, which
+  destroys the settling time it exists for while still looking like a
+  synchronizer to a reviewer). Findings land in the same violations table as
+  every other engine, with the same waivers, trends, SARIF export and
+  cross-probe. Every run states what it analysed, so silence means "checked and
+  clean" rather than "did not run".
+- **Clock-tree tracing, a constraints file, and the fix that looks careful
+  (Pro).** Open Core resolves each register's clock to the literal net driving
+  it and treats every distinct net as asynchronous to every other. That cannot
+  miss a crossing, but it also means a clock through a buffer, an enable gate
+  or a divider looks like a different clock on the far side — on a design with
+  one gated clock, a handful of real crossings can become hundreds of reported
+  ones. Pro traces the clock tree through buffers, inverters, gates, muxes and
+  divider flops, with nothing to configure, so one oscillator behind three
+  clock nets is recognized as one domain. A `cdc.yaml` beside your sources
+  declares what no structural analysis can see — clocks fed from a shared PLL,
+  synchronous groups, handshake-qualified buses, crossings you have reviewed —
+  and is read identically by the desktop app and by `lintcrux-pro --ci`,
+  because a CDC gate that only works with a window open is not a gate. Pro also
+  recognizes N-flop chains, gray-coded pointers, and `cdc/per-bit-sync-bus`:
+  a bus "synchronized" with a separate two-flop chain per bit. Every warning
+  goes quiet and the design is *more* dangerous than before — the chains
+  resolve independently, so bits that changed together can land in different
+  destination cycles and the receiver reads a value that was never present
+  anywhere. Use a handshake or an async FIFO.
+- **The Rule Browser.** 644 rules across all seven engines in one searchable
+  catalog — every rule an engine can emit, with its severity, its tags and a
+  link to its upstream documentation. Search by rule id or tag, filter by
+  engine, or click a rule to filter the violations table down to it. It answers
+  "what does this engine even check for" without waiting to trip over it.
+- **A Sources panel, and a way back.** The left rail lists every source file the
+  project holds, each with a one-click remove that rewrites the project and
+  re-runs (the file on disk is untouched). On the right, **Back to engine
+  status** returns from the Inspector to the run summary, and the diagnostics
+  panel can be closed.
+- **One file opens a design in all four products.** Write a `.crux-project`
+  manifest at the root of your design — naming the dump, the RTL, the lint
+  project and the regression config — check it in next to the RTL, and open it
+  in any Crux product. LintCrux opens the `lint` artifact, and says so plainly
+  when a manifest does not name one yet. All four products derive the same
+  design identity from it, so cross-probing works exactly as it does when you
+  open each file by hand. Open Core in all four products.
+
+### Fixed
+
+- **Closing a project while its waivers are still loading no longer throws.**
+  The waiver store came back from its file I/O and emitted into a stream that
+  had already closed, which surfaced as an unhandled error with a stack trace
+  pointing at the wrong place. A store torn down mid-reload is ordinary
+  shutdown, not a fault.
+
+### Also
+
+- Other performance and quality enhancements.
+
+---
+
 ## 0.6.0 — 2026-08-04
 
 An engines release, with a RISC-V flavour: the lowRISC / OpenTitan style guide
