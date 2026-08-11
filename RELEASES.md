@@ -6,6 +6,47 @@ is also where the download links are posted while the beta is opening up.
 
 ---
 
+## 0.7.1 — 2026-08-11
+
+One fix, and it is the kind worth shipping on its own: clock-domain-crossing
+analysis could report a genuinely unprotected crossing as protected.
+
+### Fixed
+
+- **A captured value in use is no longer mistaken for a synchronizer.**
+  Recognising a two-flop chain came down to "some register in the destination
+  domain reads this one's output" — which describes a synchronizer, and equally
+  describes the most ordinary thing a design does with a value it just
+  captured:
+
+  ```verilog
+  always @(posedge clk_b) captured <= data_bus;  // the crossing
+  always @(posedge clk_b) scratch  <= captured;  // ordinary downstream use
+  ```
+
+  Structurally identical, opposite verdicts required. The consequence was that
+  adding perfectly normal logic downstream of a crossing made the crossing stop
+  being reported — a clean result on a real hazard, which is the one answer a
+  CDC tool must never give. A related case reported an unsynchronized bus as
+  "combinational logic inside the synchronizer", which kept the finding but
+  described the wrong problem.
+
+  A staging flop is private by definition, so recognition now requires the
+  first flop's output to feed nothing but the second stage. **If you have run
+  CDC analysis on a design where a crossed value is used downstream — which is
+  most designs — re-run it on this build.** Both tiers were affected.
+
+- **Findings name the bus.** Every crossing in a design written with a reset
+  reported as "an unnamed 8-bit bus", because the name was read from a net that
+  the elaborator generates rather than one you wrote. They now read
+  `8-bit bus \`data\``.
+
+### Also
+
+- Other performance and quality enhancements.
+
+---
+
 ## 0.7.0 — 2026-08-11
 
 A clock-domain release. LintCrux now finds clock-domain crossings itself —
