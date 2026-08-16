@@ -6,6 +6,41 @@ is also where the download links are posted while the beta is opening up.
 
 ---
 
+## 0.8.0 — 2026-08-16
+
+FuseSoC users get a route in that needs no hand-editing: LintCrux reads the
+EDAM file FuseSoC already generates.
+
+### New
+
+- **Import a FuseSoC/Edalize EDAM description.** `fusesoc run --target=lint
+  --setup <core>` resolves your dependency closure and writes a fully resolved
+  `.eda.yml`; LintCrux now consumes that file directly, either from
+  **File ▸ Import FuseSoC EDAM…** or with `lintcrux --import-edam
+  build/…/*.eda.yml --sarif out.sarif`. Sources arrive with their per-file
+  language, include directories, top level, defines and Verilator options
+  already set, and `.vlt` waiver files are ordered ahead of the sources the way
+  Edalize orders them — so a complete FuseSoC → LintCrux pipeline is two
+  commands with nothing edited in between. Anything the format expresses that
+  LintCrux cannot yet use warns and carries on rather than failing the import.
+  Verified end to end against SERV.
+- **Findings can tell your code from your dependencies.** An imported project
+  records which FuseSoC core each source came from, so a violation in a
+  vendored dependency is distinguishable from one in the module you are
+  actually working on.
+
+### Fixed
+
+- **Opening a file no longer breaks on macOS.** A file-picker dependency
+  update turned every Open File into a plugin error; backed out and pinned, in
+  all four products.
+
+### Also
+
+- Other performance and quality enhancements.
+
+---
+
 ## 0.7.1 — 2026-08-11
 
 One fix, and it is the kind worth shipping on its own: clock-domain-crossing
