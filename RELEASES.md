@@ -6,6 +6,25 @@ is also where the download links are posted while the beta is opening up.
 
 ---
 
+## Unreleased
+
+### Fixed
+
+- **A corrupt or mid-upgrade database can no longer lose your violation
+  history.** `trends.db`, `acknowledged_alerts.db` and `cache.db` all back
+  themselves up before any schema upgrade, and a genuinely damaged file is
+  renamed aside rather than deleted, so the bytes are always still on disk
+  afterwards. This replaces a recovery path that treated *any* open failure
+  — including a merely locked file — as corruption and answered it by
+  deleting the file outright; that could and did destroy a Pro user's entire
+  violation history.
+- **`lintcrux --version` and CXP peer announcements were reporting `0.1.0`**
+  for several releases while the app itself was on 0.8.0 — a build-info
+  constant that stopped being updated alongside the real version. Fixed, and
+  now guarded so it cannot drift again.
+
+---
+
 ## 0.8.0 — 2026-08-16
 
 FuseSoC users get a route in that needs no hand-editing: LintCrux reads the
