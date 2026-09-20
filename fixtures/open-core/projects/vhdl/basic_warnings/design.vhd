@@ -1,4 +1,4 @@
--- LintCrux VHDL fixture — basic_warnings (Phase 2, GHDL engine).
+-- LintCrux VHDL fixture — basic_warnings (GHDL engine).
 --
 -- A minimal VHDL design that produces well-known `--warn-*` findings:
 --   * `--warn-hide`   — the process variable `hidden_var` shadows the

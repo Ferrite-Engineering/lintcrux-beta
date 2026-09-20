@@ -1,8 +1,8 @@
 # Engine-output fixture corpus — regeneration & provenance
 
-This corpus pins *LintCrux's parsing of engine output* (robustness plan
-WS1/WS2/WS8). Each case turns a canned engine invocation + output into the
-golden unified SARIF the parser must emit.
+This corpus pins *LintCrux's parsing of engine output*. Each case turns a
+canned engine invocation + output into the golden unified SARIF the parser
+must emit.
 
 ## Layout
 
